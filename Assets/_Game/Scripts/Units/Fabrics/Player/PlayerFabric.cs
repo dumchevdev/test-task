@@ -9,6 +9,8 @@ namespace Game
         private readonly InputSystem _inputSystem;
         private readonly Vector2 _spawnPoint;
         private readonly UnitBehaviour _prefab;
+        
+        private PlayerContainer _playerContainer;
 
         internal PlayerFabric(PlayerData playerData, InputSystem inputSystem, Vector2 spawnPoint)
         {
@@ -25,6 +27,7 @@ namespace Game
             var visual = behaviour.GetComponent<UnitVisual>();
 
             ConfigureBehaviour(behaviour, visual);
+            ConfigurePlayer(behaviour, visual);
         }
         
         private void ConfigureBehaviour(UnitBehaviour behaviour, UnitVisual visual)
@@ -41,6 +44,20 @@ namespace Game
             var velocityProcessor = new VelocityProcessorComponent(_playerData, rigidBody);
             
             behaviour.Construct(groundChecker, gravityProcessor, velocityProcessor);
+        }
+        
+        private void ConfigurePlayer(UnitBehaviour behaviour, UnitVisual visual)
+        {
+            var movementHandler = new MovementInputHandler(_playerData, _inputSystem);
+            var jumpHandler = new JumpInputHandler(_playerData, _inputSystem);
+            var inputHandlersContainer = new InputHandlersContainer(movementHandler, jumpHandler);
+            
+            _playerContainer = new PlayerContainer(inputHandlersContainer);
+        }
+
+        public void Dispose()
+        {
+            _playerContainer.Dispose();
         }
     }
 }

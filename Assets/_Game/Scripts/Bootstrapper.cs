@@ -37,6 +37,11 @@ namespace Game
         {
             _inputSystem.OnUpdate();
         }
+
+        private void OnDestroy()
+        {
+            _playerFabric.Dispose();
+        }
     }
 }
 
