@@ -4,13 +4,13 @@ namespace Game
     {
         private readonly PlayerData _playerData;
         private readonly InputSystem _inputSystem;
-        private readonly UnitVisual _visual;
+        private readonly UnitBehaviour _behaviour;
 
-        internal ColorUpdatedInputHandler(PlayerData playerData, InputSystem inputSystem, UnitVisual visual)
+        internal ColorUpdatedInputHandler(PlayerData playerData, InputSystem inputSystem, UnitBehaviour behaviour)
         {
             _playerData = playerData;
             _inputSystem = inputSystem;
-            _visual = visual;
+            _behaviour = behaviour;
 
             _inputSystem.OnColorUpdated += OnColorUpdated;
         }
@@ -21,7 +21,7 @@ namespace Game
             
             var color = ColorExtension.GenerateColor();
             _playerData.Color = color;
-            _visual.SetColor(color);
+            _behaviour.SetColor(color);
         }
 
         public void Dispose()

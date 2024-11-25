@@ -20,5 +20,5 @@ MonoBehaviour:
   JumpPower: 40
   MaxFallSpeed: 60
   FallAcceleration: 110
-  GroundingForce: -9.8
+  GroundingForce: -10
   GroundCheckerRadius: 0.2

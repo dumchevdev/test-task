@@ -3,10 +3,13 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(UnitVisual))]
     internal sealed class UnitBehaviour : MonoBehaviour
     {
         private Rigidbody2D _rigidbody;
+        private UnitVisual _visual;
         private IFixedUpdateable[] _fixedUpdateables;
         
         internal event Action OnDied;
@@ -19,12 +22,20 @@ namespace Game
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            _visual = GetComponent<UnitVisual>();
+        }
+
+        internal void SetColor(Color color)
+        {
+            _visual.SetColor(color);
         }
         
         internal void SetPosition(Vector2 position)
         {
+            _visual.SetEmittingTrail(false);
             transform.position = position;
             _rigidbody.velocity = Vector2.zero;
+            _visual.SetEmittingTrail(true);
         }
         
         private void FixedUpdate()

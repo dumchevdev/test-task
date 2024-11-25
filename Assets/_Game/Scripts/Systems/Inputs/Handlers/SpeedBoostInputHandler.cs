@@ -8,17 +8,16 @@ namespace Game
         private readonly PlayerData _playerData;
         private readonly InputSystem _inputSystem;
         private readonly UnitBehaviour _behaviour;
-        private readonly UnitVisual _visual;
 
-        internal SpeedBoostInputHandler(PlayerData playerData, InputSystem inputSystem, UnitBehaviour behaviour, UnitVisual visual)
+        internal SpeedBoostInputHandler(PlayerData playerData, InputSystem inputSystem, UnitBehaviour behaviour)
         {
             _playerData = playerData;
             _inputSystem = inputSystem;
             _behaviour = behaviour;
-            _visual = visual;
 
             _inputSystem.OnSpeedBoost += OnSpeedBoost;
-            _behaviour.OnDied += OnRespawn;
+            _inputSystem.OnCloneCreated += OnReset;
+            _behaviour.OnDied += OnReset;
         }
 
         private void OnSpeedBoost()
@@ -42,22 +41,17 @@ namespace Game
                 if (Mathf.Approximately(intervalProgress, 0f))
                     (firstColor, secondColor) = (secondColor, firstColor);
 
-                _visual.SetColor(Color.Lerp(firstColor, secondColor, intervalProgress));
+                _behaviour.SetColor(Color.Lerp(firstColor, secondColor, intervalProgress));
                 
                 yield return null;
             }
 
-            Reset();
+            OnReset();
         }
         
-        private void OnRespawn()
+        private void OnReset()
         {
-            Reset();
-        }
-        
-        private void Reset()
-        {
-            _visual.SetColor(_playerData.Color);
+            _behaviour.SetColor(_playerData.Color);
             _behaviour.StopAllCoroutines();
             _playerData.BoostBlocked = false;
             _playerData.CurrentSpeed = _playerData.Stats.BaseSpeed;
@@ -66,7 +60,7 @@ namespace Game
         public void Dispose()
         {
             _inputSystem.OnSpeedBoost -= OnSpeedBoost;
-            _behaviour.OnDied -= OnRespawn;
+            _behaviour.OnDied -= OnReset;
         }
     }
 }

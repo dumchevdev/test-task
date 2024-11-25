@@ -9,6 +9,7 @@ namespace Game
         internal event Action OnJump;
         public event Action OnSpeedBoost;
         public event Action OnColorUpdated;
+        public event Action OnCloneCreated;
         
         internal void OnUpdate()
         {
@@ -16,6 +17,7 @@ namespace Game
             ProcessButtonPress(Constance.Inputs.JumpAxis, OnJump);
             ProcessButtonPress(Constance.Inputs.SpeedBoostKey, OnSpeedBoost);
             ProcessButtonPress(Constance.Inputs.ColorUpdatedKey, OnColorUpdated);
+            ProcessButtonPress(Constance.Inputs.CloneCreationKey, OnCloneCreated);
         }
         
         private void ProcessAxisInput(string axisName, Action<float> eventAction)
