@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class InputSystem
+    internal sealed class InputSystem
     {
         public event Action<float> OnHorizontalInput;
         public event Action OnJumpPressed;

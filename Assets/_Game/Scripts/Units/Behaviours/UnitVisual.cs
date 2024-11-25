@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    internal class UnitVisual : MonoBehaviour
+    internal sealed class UnitVisual : MonoBehaviour
     {
         [Header("VISUAL")]
         [SerializeField] private SpriteRenderer _spriteRenderer;

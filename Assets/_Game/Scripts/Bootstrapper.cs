@@ -22,12 +22,15 @@ namespace Game
         
         private void InitializeFabrics()
         {
-            _playerFabric = new PlayerFabric(spawnPoint.position);
+            var _stats = Resources.Load<UnitStats>(Constance.Units.UnitStatsPath);
+            var playerData = new PlayerData(_stats);
+
+            _playerFabric = new PlayerFabric(playerData, _inputSystem, spawnPoint.position);
         }
 
         private void Start()
         {
-            _playerFabric.Spawn();
+            _playerFabric.Instantiate();
         }
 
         private void Update()
