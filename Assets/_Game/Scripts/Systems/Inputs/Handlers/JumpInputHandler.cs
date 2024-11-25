@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Game
 {
     internal sealed class JumpInputHandler : IInputHandler
@@ -12,7 +10,7 @@ namespace Game
             _playerData = playerData;
             _inputSystem = inputSystem;
             
-            _inputSystem.JumpInitiated += OnJump;
+            _inputSystem.OnJump += OnJump;
         }
 
         private void OnJump()
@@ -25,7 +23,7 @@ namespace Game
 
         public void Dispose()
         {
-            _inputSystem.JumpInitiated += OnJump;
+            _inputSystem.OnJump -= OnJump;
         }
     }
 }

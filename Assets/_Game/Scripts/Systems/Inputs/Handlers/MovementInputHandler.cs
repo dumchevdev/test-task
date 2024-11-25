@@ -12,7 +12,7 @@ namespace Game
             _playerData = playerData;
             _inputSystem = inputSystem;
             
-            _inputSystem.HorizontalInputReceived += OnMove;
+            _inputSystem.OnMove += OnMove;
         }
 
         private void OnMove(float direction)
@@ -25,7 +25,7 @@ namespace Game
 
         public void Dispose()
         {
-            _inputSystem.HorizontalInputReceived += OnMove;
+            _inputSystem.OnMove -= OnMove;
         }
     }
 }

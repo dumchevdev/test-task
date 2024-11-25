@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a83fc7137524af99cf5af3947d2e340, type: 3}
   m_Name: UnitStats
   m_EditorClassIdentifier: 
-  MaxSpeed: 30
+  BaseSpeed: 30
   Acceleration: 120
-  GroundingForce: -1.5
+  SpeedBoostMod: 2
+  SpeedBoostDuration: 3
+  SpeedBoostAnimationInterval: 0.2
   JumpPower: 40
   MaxFallSpeed: 60
   FallAcceleration: 110
+  GroundingForce: -9.8
   GroundCheckerRadius: 0.2

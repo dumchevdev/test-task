@@ -7,6 +7,7 @@ namespace Game
         internal static class Layers
         {
             internal const string GroundLayer = "Ground";
+            internal const string DeathLayer = "Death";
         }
         
         internal static class Names
@@ -19,6 +20,9 @@ namespace Game
         {
             internal const string HorizontalAxis = "Horizontal";
             internal const string JumpAxis = "Jump";
+            internal const KeyCode SpeedBoostKey = KeyCode.LeftShift;
+            internal const KeyCode CloneCreationKey = KeyCode.R;
+            internal const KeyCode ColorUpdatedKey = KeyCode.C;
         }
         
         internal static class Units

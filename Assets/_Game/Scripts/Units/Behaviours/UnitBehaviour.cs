@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -7,6 +8,8 @@ namespace Game
     {
         private Rigidbody2D _rigidbody;
         private IFixedUpdateable[] _fixedUpdateables;
+        
+        internal event Action OnDied;
 
         internal void Construct(params IFixedUpdateable[] fixedUpdateables)
         {
@@ -30,6 +33,12 @@ namespace Game
             {
                 component.FixedUpdateInternal();
             }
+        }
+        
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer(Constance.Layers.DeathLayer))
+                OnDied?.Invoke();
         }
     }
 }

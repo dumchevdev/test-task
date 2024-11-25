@@ -50,9 +50,11 @@ namespace Game
         {
             var movementHandler = new MovementInputHandler(_playerData, _inputSystem);
             var jumpHandler = new JumpInputHandler(_playerData, _inputSystem);
-            var inputHandlersContainer = new InputHandlersContainer(movementHandler, jumpHandler);
+            var colorUpdatedHandler = new ColorUpdatedInputHandler(_playerData, _inputSystem, visual);
+            var speedBoostHandler = new SpeedBoostInputHandler(_playerData, _inputSystem, behaviour, visual);
             
-            _playerContainer = new PlayerContainer(inputHandlersContainer);
+            var inputHandlersContainer = new InputHandlersContainer(movementHandler, jumpHandler, colorUpdatedHandler, speedBoostHandler);
+            _playerContainer = new PlayerContainer(behaviour, visual, _spawnPoint, inputHandlersContainer);
         }
 
         public void Dispose()

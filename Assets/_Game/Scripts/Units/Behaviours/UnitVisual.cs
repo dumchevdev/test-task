@@ -16,5 +16,11 @@ namespace Game
             _trailRenderer.startColor = color;
             _trailRenderer.endColor = _transparentColor;
         }
+
+        internal void SetEmittingTrail(bool active)
+        {
+            _trailRenderer.Clear();
+            _trailRenderer.emitting = active;
+        }
     }
 }
